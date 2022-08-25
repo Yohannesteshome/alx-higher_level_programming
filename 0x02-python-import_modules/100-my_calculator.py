@@ -1,16 +1,18 @@
 #!/usr/bin/python3
+
 if __name__ == "__main__":
+    from calculator_1 import add, sub, mul, div
     import sys
-    argv = sys.argv[1:]
-    argv_count = len(argv)
-    index = 1
-    if argv_count is 0:
-        print("{:d} arguments.".format(argv_count))
-    elif argv_count is 1:
-        print("{:d} argument:".format(argv_count))
-        print("{:d}: {:s}".format(index, sys.argv[1]))
-    else:
-        print("{:d} arguments:".format(argv_count))
-        while index <= argv_count:
-            print("{:d}: {:s}".format(index, sys.argv[index]))
-            index += 1
+
+    av = sys.argv
+    ac = len(av) - 1
+
+    if ac != 3:
+        print("Usage: ./100-my_calculator.py <a> <operator> <b>")
+        exit(1)
+    if av[2] not in "+-*/":
+        print("Unknown operator. Available operators: +, -, * and /")
+        exit(1)
+    fcts = {'+': add, '-': sub, '*': mul, '/': div}
+    print("{:s} {:s} {:s} = {:d}".format(av[1], av[2], av[3],
+                                         fcts[av[2]](int(av[1]), int(av[3]))))
